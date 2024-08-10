@@ -1,0 +1,65 @@
+/* styles.css */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+
+  background-color: #6b728075;
+
+  /* background-color: white; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal {
+  background: #080525;
+  padding-top: 20px;
+  
+  padding-bottom: 30px;
+  border: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  height: 90%;
+  overflow-y: hidden;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+.modalfade {
+  background: #080525;
+  padding-top: 60px;
+  padding-bottom: 30px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  height: 90%;
+  border: 1px solid white;
+  overflow-y: hidden;
+  animation-name: zoomout;
+  animation-duration: 0.6s;
+}
+
+@media screen and (max-width: 1000px) {
+  .modal {
+    background: #080525;
+    padding-top: 60px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 700px;
+    height: 90%;
+    overflow-y: scroll;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+  }
+}
+
+@keyframes zoom {
+  from {transform:scale(0)}
+  to {transform:scale(1)}
+}
+@keyframes zoomout {
+  from {transform:scale(1)}
+  to {transform:scale(0)}
+}
