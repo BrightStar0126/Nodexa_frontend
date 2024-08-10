@@ -1,7 +1,8 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import * as XLSX from "xlsx";
+import { userGet, userUpdate } from "../../app/actions/auth";
 const billingHistoryHeader = [
   "Transaction ID",
   "Description",
@@ -32,6 +33,17 @@ export default function MyAccount() {
   const [newPwdHide, setNewPwdHide] = useState<boolean>(true);
   const [cnewPwd, setCNewPwd] = useState<string>("password");
   const [cnewPwdHide, setCNewPwdHide] = useState<boolean>(true);
+
+  useEffect(() => {
+    const res = userGet()
+      .then(res => setEmail(res.email))
+      .catch(err => console.log(err));
+  }, []);
+
+  const handleEmailChange = () => {
+    userUpdate({ email, password: newPwd });
+  }
+
   const handleExcelExport = () => {
     // Create a worksheet
     const worksheet = XLSX.utils.aoa_to_sheet([
@@ -79,6 +91,11 @@ export default function MyAccount() {
                 onChange={(e) => setEmail(e.target.value)}
                 className="flex justify-center items-center border-[#1EC0CA] border rounded-[10px] text-xl text-white bg-transparent w-1/3  min-w-[fit-content] py-2 pl-12 pr-3"
               />
+            </div>
+            <div className="flex justify-end gap-4">
+              <button className="flex justify-end items-center rounded-[20px] bg-[#3CDD22] uppercase text-white py-2 px-5 cursor-pointer font-bold" onClick={handleEmailChange}>
+                Save
+              </button>
             </div>
           </div>
         </div>
@@ -207,6 +224,11 @@ export default function MyAccount() {
               </div>
             </div>
           </div>
+          <div className="flex justify-end gap-4">
+            <button className="flex justify-end items-center rounded-[20px] bg-[#3CDD22] uppercase text-white py-2 px-5 cursor-pointer font-bold" onClick={handleEmailChange}>
+              Save
+            </button>
+          </div>
         </div>
         <div className="w-full bg-gradient-to-r from-[#221E45] via-[#00AEB9] to-[#221E45] h-[1px]"></div>
         <div className="flex gap-5 justify-between items-start w-full xl:w-[70%] flex-col">
@@ -240,7 +262,7 @@ export default function MyAccount() {
               height={20}
               src="/modal/delete.png"
               alt="delete"
-              
+
             />
           </div>
         </div>
@@ -258,7 +280,7 @@ export default function MyAccount() {
           <div className="table-container rounded-xl  border-none w-full overflow-y-auto">
             <table className="rounded-xl  border-none w-full" ref={tableRef}>
               <thead className="bg-transparent sticky top-0 z-10 ">
-                <tr style={{ fontSize: "24px", fontFamily:"sora-bold"}}>
+                <tr style={{ fontSize: "24px", fontFamily: "sora-bold" }}>
                   {billingHistoryHeader.map((item, index) => (
                     <th
                       key={index}
@@ -275,9 +297,8 @@ export default function MyAccount() {
                   <>
                     <tr
                       key={index}
-                      className={`hover:bg-[#4796d64f] transition-all border-none cursor-pointer ${
-                        index % 2 === 0 ? "bg-transparent" : "bg-transparent"
-                      } `}
+                      className={`hover:bg-[#4796d64f] transition-all border-none cursor-pointer ${index % 2 === 0 ? "bg-transparent" : "bg-transparent"
+                        } `}
                     >
                       <td className="px-6 py-4 whitespace-nowrap text-white">
                         {item.txID}
