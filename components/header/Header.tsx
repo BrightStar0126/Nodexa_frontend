@@ -28,9 +28,11 @@ export default function Header() {
     router.push("/signup");
   };
   const handleLogout = () => {
-    console.log("handleLogout ======>>>>>>>>>>");
-    localStorage.setItem("token", "");
-    router.push("/");
+    if (typeof window !== 'undefined') {
+      console.log("handleLogout ======>>>>>>>>>>");
+      localStorage.setItem("token", "");
+      router.push("/");
+    }
   };
   const handleMyAccount = () => {
     router.push("/myAccount");
