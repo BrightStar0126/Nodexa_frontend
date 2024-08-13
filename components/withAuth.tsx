@@ -4,17 +4,19 @@ import { useRouter } from 'next/navigation';
 
 export const WithProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const router = useRouter();
-  let isAuthenticated: boolean = false;
+  let isAuthenticated: boolean = true;
 
   useEffect(() => {
-    console.log("isAuthenticated: ", isAuthenticated);
     if (typeof window !== 'undefined') {
-      const isAuthenticated =
+      console.log("isAuthenticated: ", isAuthenticated);
+      isAuthenticated =
         localStorage.getItem('token') !== undefined &&
         localStorage.getItem('token') !== "";
     }
     if (!isAuthenticated) {
       router.push('/login'); // Redirect to login if not authenticated
+    } else {
+      router.forward();
     }
   }, [isAuthenticated, router]);
 

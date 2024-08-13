@@ -8,6 +8,7 @@ import HostingPlan from "./HostingPlan";
 import { useState } from "react";
 import { statusComponent } from "../statusComponent/statusComponent";
 export default function SharedNodes() {
+  console.log("sharedNodesData", sharedNodesData);
   const [hostingPlan, setHostingPlan] = useState<number>(3);
   const handleHostingPlan_1 = () => {
     setHostingPlan(1);
