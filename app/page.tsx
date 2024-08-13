@@ -1,5 +1,5 @@
 // import dynamic from 'next/dynamic';
-'use client'
+
 import LandingPage from '../components/landingPage/LandingPage';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';

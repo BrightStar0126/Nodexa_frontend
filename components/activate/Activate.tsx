@@ -11,7 +11,7 @@ const Activate = ({ params }: { params: { activation_token: string } }) => {
   const router = useRouter();
   const activation_token = params.activation_token;
   const [err, setErr] = useState("");
-  const [success, setSuccess] = useState("");
+  const [success, setSuccess] = useState("Activate is Failed");
 
   useEffect(() => {
     if (activation_token) {
